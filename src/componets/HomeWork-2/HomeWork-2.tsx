@@ -18,6 +18,7 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import { Button, ButtonGroup } from "@material-ui/core";
 import ButtonItem from "../common/Button/ButtonItem";
 import CheckboxItem from "../common/Checkbox/CheckboxItem";
+import InputItem from "../common/Input/InputItem";
 
 export type onChangeFilterType = "hight" | "middle" | "low";
 export type dataType = {
@@ -34,26 +35,16 @@ export const HomeWork2 = () => {
     { id: v1(), n: "TDD", filter: "hight" },
     { id: v1(), n: "Books", filter: "low" },
   ]);
-  let [title, setTitle] = useState("");
 
   const removeList = (id: string) => {
     let newData = data.filter((el) => el.id !== id);
     setData(newData);
   };
-  const AddList = () => {
-    if (title.trim() !== "") {
-      setData([...data, { id: v1(), n: title, filter: "hight" }]);
-      setTitle("");
-    } else {
-      alert("Вы ничего не вели,не делай так больше =)");
-    }
+  const AddList = (title: string) => {
+    setData([...data, { id: v1(), n: title, filter: "hight" }]);
   };
   const onChangeFilter = (filter: onChangeFilterType) => {
     let newData = data.find((el) => el.filter === filter);
-    // if (newData) {
-    //   newData.filter = filter;
-    //   setData(newData);
-    // }
   };
   return (
     <div>
@@ -65,24 +56,7 @@ export const HomeWork2 = () => {
               <Typography variant="h2" align="center">
                 Список дела на сегодня
               </Typography>
-              <TextField
-                id="filled-basic"
-                label="Filled"
-                variant="filled"
-                value={title}
-                onChange={(el) => {
-                  setTitle(el.currentTarget.value);
-                }}
-              />
-              <IconButton
-                aria-label="comments"
-                color="inherit"
-                onClick={() => {
-                  AddList();
-                }}
-              >
-                <PlaylistAddIcon fontSize="large" />
-              </IconButton>
+              <InputItem id="1" add={AddList} />
               {data.map((value) => {
                 return (
                   <ListItem key={value.id} dense button>
@@ -100,20 +74,6 @@ export const HomeWork2 = () => {
                           }}
                         />
                       </ListItemIcon>
-
-                      {/* <ListItemIcon>
-                        <ButtonItem key={value.id}  />
-                      </ListItemIcon> */}
-
-                      {/* <IconButton
-                        aria-label="comments"
-                        color="inherit"
-                        onClick={() => {
-                          removeList(value.id);
-                        }}
-                      >
-                        <DeleteForeverIcon />
-                      </IconButton> */}
                     </ListItemSecondaryAction>
                   </ListItem>
                 );

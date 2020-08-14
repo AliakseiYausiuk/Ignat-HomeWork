@@ -15,6 +15,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
+import { Link } from "react-router-dom";
 
 // CSS STYLES
 
@@ -37,18 +38,22 @@ const menuItem = [
   {
     listIcon: <HomeIcon />,
     listText: "Home",
+    listPath: "/",
   },
   {
     listIcon: <ReorderIcon />,
     listText: "PreJunior",
+    listPath: "/PreJunior",
   },
   {
     listIcon: <ReorderIcon />,
     listText: "Junior",
+    listPath: "/Junior",
   },
   {
     listIcon: <ReorderIcon />,
     listText: "Junior+",
+    listPath: "/Junior+",
   },
 ];
 
@@ -68,7 +73,7 @@ export const Header = () => {
       <List>
         {menuItem.map((lsItem, key) => (
           <>
-            <ListItem button key={key}>
+            <ListItem button key={key} component={Link} to={lsItem.listPath}>
               <ListItemIcon className={classes.menuItem}>
                 {lsItem.listIcon}
               </ListItemIcon>
