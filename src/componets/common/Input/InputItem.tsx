@@ -43,6 +43,7 @@ export default function InputItem(props: InputItemType) {
         helperText={error}
         error={!!error}
       />
+
       <ButtonItem title={"Add"} click={addMessage} id={props.id} />
     </Grid>
   );
